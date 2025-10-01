@@ -9,8 +9,9 @@ public class CameraSwitcher : MonoBehaviour
     public Camera camMesa;
     public Camera camBanheiro;
 
-    // Desativa todas e ativa a escolhida
-    private void ActivateCamera(Camera targetCamera)
+    public VerificacaoLista verificacaoLista;
+
+    private void ActivateCamera(Camera targetCamera, string nomeCamera)
     {
         mainCamera.gameObject.SetActive(false);
         camArmario.gameObject.SetActive(false);
@@ -19,30 +20,31 @@ public class CameraSwitcher : MonoBehaviour
 
         if (targetCamera != null)
             targetCamera.gameObject.SetActive(true);
+
+        if (verificacaoLista != null)
+            verificacaoLista.AtualizarVisibilidadePorCamera(nomeCamera);
     }
 
-    // Métodos públicos para os botões
     public void ShowMainCamera()
     {
-        ActivateCamera(mainCamera);
+        ActivateCamera(mainCamera, "Principal");
     }
 
     public void ShowCamArmario()
     {
-        ActivateCamera(camArmario);
+        ActivateCamera(camArmario, "Armario");
     }
 
     public void ShowCamMesa()
     {
-        ActivateCamera(camMesa);
+        ActivateCamera(camMesa, "Mesa");
     }
 
     public void ShowCamBanheiro()
     {
-        ActivateCamera(camBanheiro);
+        ActivateCamera(camBanheiro, "Banheiro");
     }
 
-    // Inicia com a câmera principal ativa
     private void Start()
     {
         ShowMainCamera();
